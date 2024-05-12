@@ -42,11 +42,13 @@ test("renders Pet components based on its props", () => {
 });
 
 test("passes an `onAdoptPet` callback prop to its children Pet components", () => {
-  const onAdoptPet = jest.fn();
+  const onAdoptPet = jest.fn(); // Mock the onAdoptPet function
   render(<PetBrowser pets={testPets} onAdoptPet={onAdoptPet} />);
 
-  const button = screen.queryAllByText(/Adopt pet/)[0];
-  fireEvent.click(button);
+  const adoptButtons = screen.getAllByText("Adopt pet"); // Get all adopt pet buttons
+  adoptButtons.forEach(button => {
+    fireEvent.click(button); // Click on each adopt pet button
+  });
 
-  expect(onAdoptPet).toHaveBeenCalled();
+  expect(onAdoptPet).toHaveBeenCalledTimes(testPets.length); // Ensure onAdoptPet is called for each pet
 });

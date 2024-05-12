@@ -10,6 +10,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+
 describe("Fetching pets", () => {
   it("should fetch all pets by default", async () => {
     render(<App />);
